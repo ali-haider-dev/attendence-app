@@ -8,11 +8,19 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\AdjustmentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QrAttendanceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 })->name('login');
+
+// Public QR Attendance Routes (No Authentication Required)
+Route::prefix('qr-attendance')->name('qr-attendance.')->group(function () {
+    Route::get('/scanner', [QrAttendanceController::class, 'scanner'])->name('scanner');
+    Route::post('/scan', [QrAttendanceController::class, 'scan'])->name('scan');
+    Route::get('/status/{employeeId}', [QrAttendanceController::class, 'status'])->name('status');
+});
 
 
 Route::middleware(['auth'])->group(function () {
