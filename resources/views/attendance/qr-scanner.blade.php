@@ -174,8 +174,8 @@
                 console.error('Error:', error);
                 showMessage('Network error. Please try again.', 'error');
             } finally {
-                // Reset input and refocus after 3 seconds
-                setTimeout(resetFocus, 3000);
+
+                setTimeout(() => { resetFocus(); }, 1000);
             }
         }
 
